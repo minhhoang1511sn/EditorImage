@@ -1,4 +1,4 @@
-package com.sujithasrs.edity.base;
+package com.EditorImage.edity.base;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

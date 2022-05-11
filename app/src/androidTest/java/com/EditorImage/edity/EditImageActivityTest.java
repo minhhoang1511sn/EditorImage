@@ -1,4 +1,4 @@
-package com.sujithasrs.edity;
+package com.EditorImage.edity;
 
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;

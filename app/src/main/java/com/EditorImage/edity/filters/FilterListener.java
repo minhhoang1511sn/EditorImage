@@ -1,4 +1,4 @@
-package com.sujithasrs.edity.filters;
+package com.EditorImage.edity.filters;
 
 import ja.burhanrashid52.photoeditor.PhotoFilter;
 

@@ -1,4 +1,4 @@
-package com.sujithasrs.edity;
+package com.EditorImage.edity;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;

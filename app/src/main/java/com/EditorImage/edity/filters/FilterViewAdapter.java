@@ -1,4 +1,4 @@
-package com.sujithasrs.edity.filters;
+package com.EditorImage.edity.filters;
 
 import android.content.Context;
 import android.content.res.AssetManager;
@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.sujithasrs.edity.R;
+import com.EditorImage.edity.R;
 
 import java.io.IOException;
 import java.io.InputStream;

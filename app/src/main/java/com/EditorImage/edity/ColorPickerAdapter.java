@@ -1,4 +1,4 @@
-package com.sujithasrs.edity;
+package com.EditorImage.edity;
 
 import android.content.Context;
 import android.graphics.Color;

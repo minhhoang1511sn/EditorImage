@@ -1,4 +1,4 @@
-package com.sujithasrs.edity;
+package com.EditorImage.edity;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

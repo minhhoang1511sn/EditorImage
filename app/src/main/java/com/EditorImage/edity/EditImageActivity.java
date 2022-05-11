@@ -1,4 +1,4 @@
-package com.sujithasrs.edity;
+package com.EditorImage.edity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -24,11 +24,11 @@ import android.view.animation.AnticipateOvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.sujithasrs.edity.base.BaseActivity;
-import com.sujithasrs.edity.filters.FilterListener;
-import com.sujithasrs.edity.filters.FilterViewAdapter;
-import com.sujithasrs.edity.tools.EditingToolsAdapter;
-import com.sujithasrs.edity.tools.ToolType;
+import com.EditorImage.edity.base.BaseActivity;
+import com.EditorImage.edity.filters.FilterListener;
+import com.EditorImage.edity.filters.FilterViewAdapter;
+import com.EditorImage.edity.tools.EditingToolsAdapter;
+import com.EditorImage.edity.tools.ToolType;
 
 import java.io.File;
 import java.io.IOException;

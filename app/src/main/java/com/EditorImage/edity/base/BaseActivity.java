@@ -1,4 +1,4 @@
-package com.sujithasrs.edity.base;
+package com.EditorImage.edity.base;
 
 import android.app.ProgressDialog;
 import android.content.pm.PackageManager;

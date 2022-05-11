@@ -1,4 +1,4 @@
-package com.sujithasrs.edity.tools;
+package com.EditorImage.edity.tools;
 public enum ToolType {
     BRUSH,
     TEXT,

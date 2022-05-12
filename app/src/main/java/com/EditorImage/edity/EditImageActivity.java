@@ -231,7 +231,7 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
                     public void onSuccess(@NonNull String imagePath) {
                         hideLoading();
                         showSnackbar("Image Saved Successfully");
-                        mPhotoEditorView.getSource().setImageURI(Uri.fromFile(new File(imagePath)));
+                        sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,Uri.fromFile(new File(imagePath))));
                     }
 
                     @Override

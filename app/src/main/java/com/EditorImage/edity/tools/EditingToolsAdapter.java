@@ -12,6 +12,7 @@ import com.EditorImage.edity.R;
 
 import java.util.ArrayList;
 import java.util.List;
+
 public class EditingToolsAdapter extends RecyclerView.Adapter<EditingToolsAdapter.ViewHolder> {
 
     private List<ToolModel> mToolList = new ArrayList<>();
@@ -25,23 +26,6 @@ public class EditingToolsAdapter extends RecyclerView.Adapter<EditingToolsAdapte
         mToolList.add(new ToolModel("Filter", R.drawable.ic_photo_filter, ToolType.FILTER));
         mToolList.add(new ToolModel("Emoji", R.drawable.ic_insert_emoticon, ToolType.EMOJI));
         mToolList.add(new ToolModel("Sticker", R.drawable.ic_sticker, ToolType.STICKER));
-    }
-
-    public interface OnItemSelected {
-        void onToolSelected(ToolType toolType);
-    }
-
-    class ToolModel {
-        private String mToolName;
-        private int mToolIcon;
-        private ToolType mToolType;
-
-        ToolModel(String toolName, int toolIcon, ToolType toolType) {
-            mToolName = toolName;
-            mToolIcon = toolIcon;
-            mToolType = toolType;
-        }
-
     }
 
     @NonNull
@@ -62,6 +46,23 @@ public class EditingToolsAdapter extends RecyclerView.Adapter<EditingToolsAdapte
     @Override
     public int getItemCount() {
         return mToolList.size();
+    }
+
+    public interface OnItemSelected {
+        void onToolSelected(ToolType toolType);
+    }
+
+    class ToolModel {
+        private String mToolName;
+        private int mToolIcon;
+        private ToolType mToolType;
+
+        ToolModel(String toolName, int toolIcon, ToolType toolType) {
+            mToolName = toolName;
+            mToolIcon = toolIcon;
+            mToolType = toolType;
+        }
+
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

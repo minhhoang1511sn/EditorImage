@@ -19,20 +19,7 @@ import android.widget.ImageView;
 
 public class StickerBSFragment extends BottomSheetDialogFragment {
 
-    public StickerBSFragment() {
-        // Required empty public constructor
-    }
-
     private StickerListener mStickerListener;
-
-    public void setStickerListener(StickerListener stickerListener) {
-        mStickerListener = stickerListener;
-    }
-
-    public interface StickerListener {
-        void onStickerClick(Bitmap bitmap);
-    }
-
     private BottomSheetBehavior.BottomSheetCallback mBottomSheetBehaviorCallback = new BottomSheetBehavior.BottomSheetCallback() {
 
         @Override
@@ -48,6 +35,13 @@ public class StickerBSFragment extends BottomSheetDialogFragment {
         }
     };
 
+    public StickerBSFragment() {
+        // Required empty public constructor
+    }
+
+    public void setStickerListener(StickerListener stickerListener) {
+        mStickerListener = stickerListener;
+    }
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -74,6 +68,25 @@ public class StickerBSFragment extends BottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+    }
+
+    private String convertEmoji(String emoji) {
+        String returnedEmoji = "";
+        try {
+            int convertEmojiToInt = Integer.parseInt(emoji.substring(2), 16);
+            returnedEmoji = getEmojiByUnicode(convertEmojiToInt);
+        } catch (NumberFormatException e) {
+            returnedEmoji = "";
+        }
+        return returnedEmoji;
+    }
+
+    private String getEmojiByUnicode(int unicode) {
+        return new String(Character.toChars(unicode));
+    }
+
+    public interface StickerListener {
+        void onStickerClick(Bitmap bitmap);
     }
 
     public class StickerAdapter extends RecyclerView.Adapter<StickerAdapter.ViewHolder> {
@@ -116,20 +129,5 @@ public class StickerBSFragment extends BottomSheetDialogFragment {
                 });
             }
         }
-    }
-
-    private String convertEmoji(String emoji) {
-        String returnedEmoji = "";
-        try {
-            int convertEmojiToInt = Integer.parseInt(emoji.substring(2), 16);
-            returnedEmoji = getEmojiByUnicode(convertEmojiToInt);
-        } catch (NumberFormatException e) {
-            returnedEmoji = "";
-        }
-        return returnedEmoji;
-    }
-
-    private String getEmojiByUnicode(int unicode) {
-        return new String(Character.toChars(unicode));
     }
 }

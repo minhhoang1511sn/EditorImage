@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ja.burhanrashid52.photoeditor.PhotoFilter;
+
 public class FilterViewAdapter extends RecyclerView.Adapter<FilterViewAdapter.ViewHolder> {
 
     private FilterListener mFilterListener;
@@ -49,23 +50,6 @@ public class FilterViewAdapter extends RecyclerView.Adapter<FilterViewAdapter.Vi
     @Override
     public int getItemCount() {
         return mPairList.size();
-    }
-
-    class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView mImageFilterView;
-        TextView mTxtFilterName;
-
-        ViewHolder(View itemView) {
-            super(itemView);
-            mImageFilterView = itemView.findViewById(R.id.imgFilterView);
-            mTxtFilterName = itemView.findViewById(R.id.txtFilterName);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mFilterListener.onFilterSelected(mPairList.get(getLayoutPosition()).second);
-                }
-            });
-        }
     }
 
     private Bitmap getBitmapFromAsset(Context context, String strName) {
@@ -105,5 +89,22 @@ public class FilterViewAdapter extends RecyclerView.Adapter<FilterViewAdapter.Vi
         mPairList.add(new Pair<>("filters/flip_horizental.png", PhotoFilter.FLIP_HORIZONTAL));
         mPairList.add(new Pair<>("filters/flip_vertical.png", PhotoFilter.FLIP_VERTICAL));
         mPairList.add(new Pair<>("filters/rotate.png", PhotoFilter.ROTATE));
+    }
+
+    class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView mImageFilterView;
+        TextView mTxtFilterName;
+
+        ViewHolder(View itemView) {
+            super(itemView);
+            mImageFilterView = itemView.findViewById(R.id.imgFilterView);
+            mTxtFilterName = itemView.findViewById(R.id.txtFilterName);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mFilterListener.onFilterSelected(mPairList.get(getLayoutPosition()).second);
+                }
+            });
+        }
     }
 }

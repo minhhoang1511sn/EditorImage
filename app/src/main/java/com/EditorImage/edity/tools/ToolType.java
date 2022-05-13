@@ -1,4 +1,5 @@
 package com.EditorImage.edity.tools;
+
 public enum ToolType {
     BRUSH,
     TEXT,

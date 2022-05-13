@@ -13,18 +13,10 @@ import android.widget.SeekBar;
 
 public class PropertiesBSFragment extends BottomSheetDialogFragment implements SeekBar.OnSeekBarChangeListener {
 
-    public PropertiesBSFragment() {
-        // Required empty public constructor
-    }
-
     private Properties mProperties;
 
-    public interface Properties {
-        void onColorChanged(int colorCode);
-
-        void onOpacityChanged(int opacity);
-
-        void onBrushSizeChanged(int brushSize);
+    public PropertiesBSFragment() {
+        // Required empty public constructor
     }
 
     @Override
@@ -91,5 +83,13 @@ public class PropertiesBSFragment extends BottomSheetDialogFragment implements S
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
 
+    }
+
+    public interface Properties {
+        void onColorChanged(int colorCode);
+
+        void onOpacityChanged(int opacity);
+
+        void onBrushSizeChanged(int brushSize);
     }
 }

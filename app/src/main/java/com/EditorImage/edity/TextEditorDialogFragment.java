@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
+
 public class TextEditorDialogFragment extends DialogFragment {
 
     public static final String TAG = TextEditorDialogFragment.class.getSimpleName();
@@ -29,11 +30,6 @@ public class TextEditorDialogFragment extends DialogFragment {
     private InputMethodManager mInputMethodManager;
     private int mColorCode;
     private TextEditor mTextEditor;
-
-    public interface TextEditor {
-        void onDone(String inputText, int colorCode);
-    }
-
 
     //Show dialog with provide text and text color
     public static TextEditorDialogFragment show(@NonNull AppCompatActivity appCompatActivity,
@@ -115,9 +111,13 @@ public class TextEditorDialogFragment extends DialogFragment {
 
     }
 
-
     //Callback to listener if user is done with text editing
     public void setOnTextEditorListener(TextEditor textEditor) {
         mTextEditor = textEditor;
+    }
+
+
+    public interface TextEditor {
+        void onDone(String inputText, int colorCode);
     }
 }

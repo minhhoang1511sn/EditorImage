@@ -51,19 +51,19 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
     private static final String TAG = EditImageActivity.class.getSimpleName();
     private static final int CAMERA_REQUEST = 52;
     private static final int PICK_REQUEST = 53;
-    private PhotoEditor mPhotoEditor;
-    private PhotoEditorView mPhotoEditorView;
-    private PropertiesBSFragment mPropertiesBSFragment;
-    private EmojiBSFragment mEmojiBSFragment;
-    private StickerBSFragment mStickerBSFragment;
-    private TextView mTxtCurrentTool;
-    private Typeface mWonderFont;
-    private RecyclerView mRvTools, mRvFilters;
-    private EditingToolsAdapter mEditingToolsAdapter = new EditingToolsAdapter(this);
-    private FilterViewAdapter mFilterViewAdapter = new FilterViewAdapter(this);
-    private ConstraintLayout mRootView;
-    private ConstraintSet mConstraintSet = new ConstraintSet();
-    private boolean mIsFilterVisible;
+    private PhotoEditor PhotoEditor;
+    private PhotoEditorView PhotoEditorView;
+    private PropertiesBSFragment PropertiesBSFragment;
+    private EmojiBSFragment EmojiBSFragment;
+    private StickerBSFragment StickerBSFragment;
+    private TextView TxtCurrentTool;
+    private Typeface WonderFont;
+    private RecyclerView RvTools, RvFilters;
+    private EditingToolsAdapter EditingToolsAdapter = new EditingToolsAdapter(this);
+    private FilterViewAdapter FilterViewAdapter = new FilterViewAdapter(this);
+    private ConstraintLayout RootView;
+    private ConstraintSet ConstraintSet = new ConstraintSet();
+    private boolean IsFilterVisible;
 
 
     @Override
@@ -74,34 +74,34 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
 
         initViews();
 
-        mWonderFont = Typeface.createFromAsset(getAssets(), "beyond_wonderland.ttf");
+        WonderFont = Typeface.createFromAsset(getAssets(), "beyond_wonderland.ttf");
 
-        mPropertiesBSFragment = new PropertiesBSFragment();
-        mEmojiBSFragment = new EmojiBSFragment();
-        mStickerBSFragment = new StickerBSFragment();
-        mStickerBSFragment.setStickerListener(this);
-        mEmojiBSFragment.setEmojiListener(this);
-        mPropertiesBSFragment.setPropertiesChangeListener(this);
+        PropertiesBSFragment = new PropertiesBSFragment();
+        EmojiBSFragment = new EmojiBSFragment();
+        StickerBSFragment = new StickerBSFragment();
+        StickerBSFragment.setStickerListener(this);
+        EmojiBSFragment.setEmojiListener(this);
+        PropertiesBSFragment.setPropertiesChangeListener(this);
 
         LinearLayoutManager llmTools = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        mRvTools.setLayoutManager(llmTools);
-        mRvTools.setAdapter(mEditingToolsAdapter);
+        RvTools.setLayoutManager(llmTools);
+        RvTools.setAdapter(EditingToolsAdapter);
 
         LinearLayoutManager llmFilters = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        mRvFilters.setLayoutManager(llmFilters);
-        mRvFilters.setAdapter(mFilterViewAdapter);
+        RvFilters.setLayoutManager(llmFilters);
+        RvFilters.setAdapter(FilterViewAdapter);
 
 
         //Typeface mTextRobotoTf = ResourcesCompat.getFont(this, R.font.roboto_medium);
         //Typeface mEmojiTypeFace = Typeface.createFromAsset(getAssets(), "emojione-android.ttf");
 
-        mPhotoEditor = new PhotoEditor.Builder(this, mPhotoEditorView)
+        PhotoEditor = new PhotoEditor.Builder(this, PhotoEditorView)
                 .setPinchTextScalable(true) // set flag to make text scalable when pinch
                 //.setDefaultTextTypeface(mTextRobotoTf)
                 //.setDefaultEmojiTypeface(mEmojiTypeFace)
                 .build(); // build photo editor sdk
 
-        mPhotoEditor.setOnPhotoEditorListener(this);
+        PhotoEditor.setOnPhotoEditorListener(this);
 
         //Set Image Dynamically
         // mPhotoEditorView.getSource().setImageResource(R.drawable.color_palette);
@@ -115,11 +115,11 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
         ImageView imgSave;
         ImageView imgClose;
 
-        mPhotoEditorView = findViewById(R.id.photoEditorView);
-        mTxtCurrentTool = findViewById(R.id.txtCurrentTool);
-        mRvTools = findViewById(R.id.rvConstraintTools);
-        mRvFilters = findViewById(R.id.rvFilterView);
-        mRootView = findViewById(R.id.rootView);
+        PhotoEditorView = findViewById(R.id.photoEditorView);
+        TxtCurrentTool = findViewById(R.id.txtCurrentTool);
+        RvTools = findViewById(R.id.rvConstraintTools);
+        RvFilters = findViewById(R.id.rvFilterView);
+        RootView = findViewById(R.id.rootView);
 
         imgUndo = findViewById(R.id.imgUndo);
         imgUndo.setOnClickListener(this);
@@ -151,8 +151,8 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
                 final TextStyleBuilder styleBuilder = new TextStyleBuilder();
                 styleBuilder.withTextColor(colorCode);
 
-                mPhotoEditor.editText(rootView, inputText, styleBuilder);
-                mTxtCurrentTool.setText(R.string.label_text);
+                PhotoEditor.editText(rootView, inputText, styleBuilder);
+                TxtCurrentTool.setText(R.string.label_text);
             }
         });
     }
@@ -182,11 +182,11 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
         switch (view.getId()) {
 
             case R.id.imgUndo:
-                mPhotoEditor.undo();
+                PhotoEditor.undo();
                 break;
 
             case R.id.imgRedo:
-                mPhotoEditor.redo();
+                PhotoEditor.redo();
                 break;
 
             case R.id.imgSave:
@@ -226,18 +226,18 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
                         .setTransparencyEnabled(true)
                         .build();
 
-                mPhotoEditor.saveAsFile(file.getAbsolutePath(), saveSettings, new PhotoEditor.OnSaveListener() {
+                PhotoEditor.saveAsFile(file.getAbsolutePath(), saveSettings, new PhotoEditor.OnSaveListener() {
                     @Override
                     public void onSuccess(@NonNull String imagePath) {
                         hideLoading();
-                        showSnackbar("Image Saved Successfully");
+                        showSnackbar("Lưu ảnh thành công");
                         sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(imagePath))));
                     }
 
                     @Override
                     public void onFailure(@NonNull Exception exception) {
                         hideLoading();
-                        showSnackbar("Failed to save Image");
+                        showSnackbar("Lưu ảnh thất bại");
                     }
                 });
             } catch (IOException e) {
@@ -253,16 +253,16 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case CAMERA_REQUEST:
-                    mPhotoEditor.clearAllViews();
+                    PhotoEditor.clearAllViews();
                     Bitmap photo = (Bitmap) data.getExtras().get("data");
-                    mPhotoEditorView.getSource().setImageBitmap(photo);
+                    PhotoEditorView.getSource().setImageBitmap(photo);
                     break;
                 case PICK_REQUEST:
                     try {
-                        mPhotoEditor.clearAllViews();
+                        PhotoEditor.clearAllViews();
                         Uri uri = data.getData();
                         Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                        mPhotoEditorView.getSource().setImageBitmap(bitmap);
+                        PhotoEditorView.getSource().setImageBitmap(bitmap);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -273,33 +273,33 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
 
     @Override
     public void onColorChanged(int colorCode) {
-        mPhotoEditor.setBrushColor(colorCode);
-        mTxtCurrentTool.setText(R.string.label_brush);
+        PhotoEditor.setBrushColor(colorCode);
+        TxtCurrentTool.setText(R.string.label_brush);
     }
 
     @Override
     public void onOpacityChanged(int opacity) {
-        mPhotoEditor.setOpacity(opacity);
-        mTxtCurrentTool.setText(R.string.label_brush);
+        PhotoEditor.setOpacity(opacity);
+        TxtCurrentTool.setText(R.string.label_brush);
     }
 
     @Override
     public void onBrushSizeChanged(int brushSize) {
-        mPhotoEditor.setBrushSize(brushSize);
-        mTxtCurrentTool.setText(R.string.label_brush);
+        PhotoEditor.setBrushSize(brushSize);
+        TxtCurrentTool.setText(R.string.label_brush);
     }
 
     @Override
     public void onEmojiClick(String emojiUnicode) {
-        mPhotoEditor.addEmoji(emojiUnicode);
-        mTxtCurrentTool.setText(R.string.label_emoji);
+        PhotoEditor.addEmoji(emojiUnicode);
+        TxtCurrentTool.setText(R.string.label_emoji);
 
     }
 
     @Override
     public void onStickerClick(Bitmap bitmap) {
-        mPhotoEditor.addImage(bitmap);
-        mTxtCurrentTool.setText(R.string.label_sticker);
+        PhotoEditor.addImage(bitmap);
+        TxtCurrentTool.setText(R.string.label_sticker);
     }
 
     @Override
@@ -311,21 +311,21 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
 
     private void showSaveDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Are you want to exit without saving image ?");
-        builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+        builder.setMessage("Bạn chưa lưu ảnh. Thật sự muốn rời");
+        builder.setPositiveButton("Lưu", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 saveImage();
             }
         });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Huỷ", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
             }
         });
 
-        builder.setNeutralButton("Discard", new DialogInterface.OnClickListener() {
+        builder.setNeutralButton("Bỏ", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 finish();
@@ -337,16 +337,16 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
 
     @Override
     public void onFilterSelected(PhotoFilter photoFilter) {
-        mPhotoEditor.setFilterEffect(photoFilter);
+        PhotoEditor.setFilterEffect(photoFilter);
     }
 
     @Override
     public void onToolSelected(ToolType toolType) {
         switch (toolType) {
             case BRUSH:
-                mPhotoEditor.setBrushDrawingMode(true);
-                mTxtCurrentTool.setText(R.string.label_brush);
-                mPropertiesBSFragment.show(getSupportFragmentManager(), mPropertiesBSFragment.getTag());
+                PhotoEditor.setBrushDrawingMode(true);
+                TxtCurrentTool.setText(R.string.label_brush);
+                PropertiesBSFragment.show(getSupportFragmentManager(), PropertiesBSFragment.getTag());
                 break;
             case TEXT:
                 TextEditorDialogFragment textEditorDialogFragment = TextEditorDialogFragment.show(this);
@@ -356,59 +356,59 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
                         final TextStyleBuilder styleBuilder = new TextStyleBuilder();
                         styleBuilder.withTextColor(colorCode);
 
-                        mPhotoEditor.addText(inputText, styleBuilder);
-                        mTxtCurrentTool.setText(R.string.label_text);
+                        PhotoEditor.addText(inputText, styleBuilder);
+                        TxtCurrentTool.setText(R.string.label_text);
                     }
                 });
                 break;
             case ERASER:
-                mPhotoEditor.brushEraser();
-                mTxtCurrentTool.setText(R.string.label_eraser);
+                PhotoEditor.brushEraser();
+                TxtCurrentTool.setText(R.string.label_eraser);
                 break;
             case FILTER:
-                mTxtCurrentTool.setText(R.string.label_filter);
+                TxtCurrentTool.setText(R.string.label_filter);
                 showFilter(true);
                 break;
             case EMOJI:
-                mEmojiBSFragment.show(getSupportFragmentManager(), mEmojiBSFragment.getTag());
+                EmojiBSFragment.show(getSupportFragmentManager(), EmojiBSFragment.getTag());
                 break;
             case STICKER:
-                mStickerBSFragment.show(getSupportFragmentManager(), mStickerBSFragment.getTag());
+                StickerBSFragment.show(getSupportFragmentManager(), StickerBSFragment.getTag());
                 break;
         }
     }
 
 
     void showFilter(boolean isVisible) {
-        mIsFilterVisible = isVisible;
-        mConstraintSet.clone(mRootView);
+        IsFilterVisible = isVisible;
+        ConstraintSet.clone(RootView);
 
         if (isVisible) {
-            mConstraintSet.clear(mRvFilters.getId(), ConstraintSet.START);
-            mConstraintSet.connect(mRvFilters.getId(), ConstraintSet.START,
+            ConstraintSet.clear(RvFilters.getId(), ConstraintSet.START);
+            ConstraintSet.connect(RvFilters.getId(), ConstraintSet.START,
                     ConstraintSet.PARENT_ID, ConstraintSet.START);
-            mConstraintSet.connect(mRvFilters.getId(), ConstraintSet.END,
+            ConstraintSet.connect(RvFilters.getId(), ConstraintSet.END,
                     ConstraintSet.PARENT_ID, ConstraintSet.END);
         } else {
-            mConstraintSet.connect(mRvFilters.getId(), ConstraintSet.START,
+            ConstraintSet.connect(RvFilters.getId(), ConstraintSet.START,
                     ConstraintSet.PARENT_ID, ConstraintSet.END);
-            mConstraintSet.clear(mRvFilters.getId(), ConstraintSet.END);
+            ConstraintSet.clear(RvFilters.getId(), ConstraintSet.END);
         }
 
         ChangeBounds changeBounds = new ChangeBounds();
         changeBounds.setDuration(350);
         changeBounds.setInterpolator(new AnticipateOvershootInterpolator(1.0f));
-        TransitionManager.beginDelayedTransition(mRootView, changeBounds);
+        TransitionManager.beginDelayedTransition(RootView, changeBounds);
 
-        mConstraintSet.applyTo(mRootView);
+        ConstraintSet.applyTo(RootView);
     }
 
     @Override
     public void onBackPressed() {
-        if (mIsFilterVisible) {
+        if (IsFilterVisible) {
             showFilter(false);
-            mTxtCurrentTool.setText(R.string.app_name);
-        } else if (!mPhotoEditor.isCacheEmpty()) {
+            TxtCurrentTool.setText(R.string.app_name);
+        } else if (!PhotoEditor.isCacheEmpty()) {
             showSaveDialog();
         } else {
             super.onBackPressed();

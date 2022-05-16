@@ -15,7 +15,7 @@ import android.widget.Toast;
 public class BaseActivity extends AppCompatActivity {
 
     public static final int READ_WRITE_STORAGE = 52;
-    private ProgressDialog mProgressDialog;
+    private ProgressDialog ProgressDialog;
 
 
     public boolean requestPermission(String permission) {
@@ -48,16 +48,16 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     protected void showLoading(@NonNull String message) {
-        mProgressDialog = new ProgressDialog(this);
-        mProgressDialog.setMessage(message);
-        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        mProgressDialog.setCancelable(false);
-        mProgressDialog.show();
+        ProgressDialog = new ProgressDialog(this);
+        ProgressDialog.setMessage(message);
+        ProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        ProgressDialog.setCancelable(false);
+        ProgressDialog.show();
     }
 
     protected void hideLoading() {
-        if (mProgressDialog != null) {
-            mProgressDialog.dismiss();
+        if (ProgressDialog != null) {
+            ProgressDialog.dismiss();
         }
     }
 

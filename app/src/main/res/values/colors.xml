@@ -20,7 +20,13 @@
     <color name="blue_sea_color">#00AEEF</color>
     <color name="green_debug_color">#4D8F58</color>
     <color name="dark_green_color">#F4F9F9</color>
+    
+    <color name="hồng">#FF5C8D</color>
+    <color name="hồng_nhạt">#FFC0D3</color>
+    <color name="hồng_trắng">#FDEFF4</color>
+    <color name="đen_nâu">#524A4E</color>
 
     <color name="tool_bg">#151414</color>
+    <color name="semi_black_transparent">#99000000</color>
 
 </resources>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/ic_launcher_background"
+    android:background="#B3000000"
     android:orientation="vertical">
 
     <TextView
@@ -14,15 +14,10 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_margin="20dp"
         android:background="@drawable/rounded_border_text_view"
         android:padding="10dp"
-        android:text="Xong"
+        android:text="Done"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="15sp" />
@@ -34,7 +29,7 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/add_text_color_picker_relative_layout"
         android:layout_below="@+id/add_text_done_tv"
-        android:background="@color/cardview_dark_background"
+        android:background="@null"
         android:gravity="center"
         android:inputType="textMultiLine"
         android:textSize="40sp" />

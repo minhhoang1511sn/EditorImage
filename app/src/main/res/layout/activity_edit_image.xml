@@ -5,9 +5,8 @@
     android:id="@+id/rootView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/hồng_trắng"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
@@ -20,15 +19,12 @@
         android:id="@+id/photoEditorView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#FBF9F9"
+        android:background="@color/hồng_trắng"
         app:layout_constraintBottom_toTopOf="@+id/rvConstraintTools"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
-
-    </ja.burhanrashid52.photoeditor.PhotoEditorView>
+        app:photo_src="@drawable/blank_image"/>
 
     <ImageView
         android:id="@+id/imgUndo"
@@ -37,7 +33,7 @@
         android:background="@android:color/transparent"
         android:padding="8dp"
         android:src="@drawable/ic_undo"
-        android:tint="#0E0303"
+        android:tint="@color/đen_nâu"
         app:layout_constraintBottom_toTopOf="@+id/rvConstraintTools"
         app:layout_constraintEnd_toStartOf="@+id/imgRedo" />
 
@@ -48,7 +44,7 @@
         android:background="@android:color/transparent"
         android:padding="8dp"
         android:src="@drawable/ic_redo"
-        android:tint="#0E0303"
+        android:tint="@color/đen_nâu"
         app:layout_constraintBottom_toTopOf="@+id/rvConstraintTools"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -59,7 +55,7 @@
         android:background="@android:color/transparent"
         android:padding="8dp"
         android:src="@drawable/ic_gallery"
-        android:tint="#0E0303"
+        android:tint="@color/đen_nâu"
         app:layout_constraintBottom_toTopOf="@+id/rvConstraintTools"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -70,15 +66,53 @@
         android:background="@android:color/transparent"
         android:padding="8dp"
         android:src="@drawable/ic_camera"
-        android:tint="#0E0303"
+        android:tint="@color/đen_nâu"
         app:layout_constraintBottom_toTopOf="@+id/rvConstraintTools"
         app:layout_constraintStart_toEndOf="@id/imgGallery" />
+
+    <ImageView
+        android:id="@+id/imgShare"
+        android:layout_width="@dimen/top_tool_icon_width"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:padding="8dp"
+        android:src="@drawable/ic_share"
+        android:tint="@color/đen_nâu"
+        app:layout_constraintBottom_toBottomOf="@+id/photoEditorView"
+        app:layout_constraintEnd_toStartOf="@+id/imgUndo"
+        app:layout_constraintStart_toEndOf="@+id/imgCamera" />
+
+    <ImageView
+        android:id="@+id/imgClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="8dp"
+        android:src="@drawable/ic_close"
+        android:tint="@color/đen_nâu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guideline" />
+
+    <ImageView
+        android:id="@+id/imgSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/ic_baseline_done_24"
+        android:tint="#651212"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guideline" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvConstraintTools"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#C693CA"
+        android:background="@color/hồng_nhạt"
         android:orientation="horizontal"
         android:paddingTop="4dp"
         android:paddingBottom="4dp"
@@ -108,36 +142,10 @@
         android:layout_marginLeft="8dp"
         android:singleLine="true"
         android:text="@string/app_name"
-        android:textColor="@android:color/white"
+        android:textColor="@color/đen_nâu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/guideline" />
-
-    <ImageView
-        android:id="@+id/imgSave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:src="@drawable/ic_baseline_done_24"
-        android:tint="#651212"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideline" />
-
-    <ImageView
-        android:id="@+id/imgClose"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="360dp"
-        android:layout_marginRight="360dp"
-        android:src="@drawable/ic_baseline_arrow_back"
-        android:tint="#651212"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline"
-        app:layout_constraintVertical_bias="0.593" />
 
 </android.support.constraint.ConstraintLayout>

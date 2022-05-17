@@ -6,7 +6,7 @@ ext {
     bintrayRepo = 'maven'
     bintrayName = 'photoeditor'
 
-    publishedGroupId = 'ja.burhanrashid52'
+    publishedGroupId = 'ja.P5T2'
     libraryName = 'PhotoEditor'
     artifact = 'photoeditor'
 

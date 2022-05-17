@@ -19,7 +19,7 @@ import ja.burhanrashid52.photoeditor.PhotoEditor;
 
 public class EmojiBSFragment extends BottomSheetDialogFragment {
 
-    private EmojiListener mEmojiListener;
+    private EmojiListener EmojiListener;
     private BottomSheetBehavior.BottomSheetCallback mBottomSheetBehaviorCallback = new BottomSheetBehavior.BottomSheetCallback() {
 
         @Override
@@ -27,7 +27,6 @@ public class EmojiBSFragment extends BottomSheetDialogFragment {
             if (newState == BottomSheetBehavior.STATE_HIDDEN) {
                 dismiss();
             }
-
         }
 
         @Override
@@ -36,7 +35,6 @@ public class EmojiBSFragment extends BottomSheetDialogFragment {
     };
 
     public EmojiBSFragment() {
-        // Required empty public constructor
     }
 
     @SuppressLint("RestrictedApi")
@@ -61,7 +59,7 @@ public class EmojiBSFragment extends BottomSheetDialogFragment {
     }
 
     public void setEmojiListener(EmojiListener emojiListener) {
-        mEmojiListener = emojiListener;
+        this.EmojiListener = emojiListener;
     }
 
     public interface EmojiListener {
@@ -98,8 +96,8 @@ public class EmojiBSFragment extends BottomSheetDialogFragment {
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (mEmojiListener != null) {
-                            mEmojiListener.onEmojiClick(emojisList.get(getLayoutPosition()));
+                        if (EmojiListener != null) {
+                            EmojiListener.onEmojiClick(emojisList.get(getLayoutPosition()));
                         }
                         dismiss();
                     }

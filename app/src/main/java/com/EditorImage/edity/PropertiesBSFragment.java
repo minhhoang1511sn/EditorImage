@@ -13,10 +13,9 @@ import android.widget.SeekBar;
 
 public class PropertiesBSFragment extends BottomSheetDialogFragment implements SeekBar.OnSeekBarChangeListener {
 
-    private Properties mProperties;
+    private Properties Properties;
 
     public PropertiesBSFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -46,9 +45,9 @@ public class PropertiesBSFragment extends BottomSheetDialogFragment implements S
         colorPickerAdapter.setOnColorPickerClickListener(new ColorPickerAdapter.OnColorPickerClickListener() {
             @Override
             public void onColorPickerClickListener(int colorCode) {
-                if (mProperties != null) {
+                if (Properties != null) {
                     dismiss();
-                    mProperties.onColorChanged(colorCode);
+                    Properties.onColorChanged(colorCode);
                 }
             }
         });
@@ -56,20 +55,20 @@ public class PropertiesBSFragment extends BottomSheetDialogFragment implements S
     }
 
     public void setPropertiesChangeListener(Properties properties) {
-        mProperties = properties;
+        Properties = properties;
     }
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
         switch (seekBar.getId()) {
             case R.id.sbOpacity:
-                if (mProperties != null) {
-                    mProperties.onOpacityChanged(i);
+                if (Properties != null) {
+                    Properties.onOpacityChanged(i);
                 }
                 break;
             case R.id.sbSize:
-                if (mProperties != null) {
-                    mProperties.onBrushSizeChanged(i);
+                if (Properties != null) {
+                    Properties.onBrushSizeChanged(i);
                 }
                 break;
         }
@@ -77,12 +76,10 @@ public class PropertiesBSFragment extends BottomSheetDialogFragment implements S
 
     @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
-
     }
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
-
     }
 
     public interface Properties {

@@ -19,7 +19,7 @@ import android.widget.ImageView;
 
 public class StickerBSFragment extends BottomSheetDialogFragment {
 
-    private StickerListener mStickerListener;
+    private StickerListener StickerListener;
     private BottomSheetBehavior.BottomSheetCallback mBottomSheetBehaviorCallback = new BottomSheetBehavior.BottomSheetCallback() {
 
         @Override
@@ -27,7 +27,6 @@ public class StickerBSFragment extends BottomSheetDialogFragment {
             if (newState == BottomSheetBehavior.STATE_HIDDEN) {
                 dismiss();
             }
-
         }
 
         @Override
@@ -40,7 +39,7 @@ public class StickerBSFragment extends BottomSheetDialogFragment {
     }
 
     public void setStickerListener(StickerListener stickerListener) {
-        mStickerListener = stickerListener;
+        StickerListener = stickerListener;
     }
 
     @SuppressLint("RestrictedApi")
@@ -67,7 +66,6 @@ public class StickerBSFragment extends BottomSheetDialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
     }
 
     private String convertEmoji(String emoji) {
@@ -92,10 +90,11 @@ public class StickerBSFragment extends BottomSheetDialogFragment {
     public class StickerAdapter extends RecyclerView.Adapter<StickerAdapter.ViewHolder> {
 
         int[] stickerList = new int[]{
+                R.drawable.aa,
+                R.drawable.bb,
                 R.drawable.bb,
                 R.drawable.cc,
                 R.drawable.dd,
-                R.drawable.aa,
                 R.drawable.ee,
                 R.drawable.ff,
                 R.drawable.ss,
@@ -119,6 +118,7 @@ public class StickerBSFragment extends BottomSheetDialogFragment {
                 R.drawable.ccc,
                 R.drawable.ddd
         };
+
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_sticker, parent, false);
@@ -145,12 +145,10 @@ public class StickerBSFragment extends BottomSheetDialogFragment {
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (mStickerListener != null) {
-                            mStickerListener.onStickerClick(
+                        if (StickerListener != null) {
+                            StickerListener.onStickerClick(
                                     BitmapFactory.decodeResource(getResources(),
                                             stickerList[getLayoutPosition()]));
-
-
                         }
                         dismiss();
                     }

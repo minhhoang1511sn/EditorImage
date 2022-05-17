@@ -20,9 +20,9 @@ import java.util.List;
 public class ColorPickerAdapter extends RecyclerView.Adapter<ColorPickerAdapter.ViewHolder> {
 
     private Context context;
+    private OnColorPickerClickListener onColorPickerClickListener;
     private LayoutInflater inflater;
     private List<Integer> colorPickerColors;
-    private OnColorPickerClickListener onColorPickerClickListener;
 
     ColorPickerAdapter(@NonNull Context context, @NonNull List<Integer> colorPickerColors) {
         this.context = context;
@@ -38,6 +38,12 @@ public class ColorPickerAdapter extends RecyclerView.Adapter<ColorPickerAdapter.
 
     public static List<Integer> getDefaultColors(Context context) {
         ArrayList<Integer> colorPickerColors = new ArrayList<>();
+        colorPickerColors.add(ContextCompat.getColor(context, R.color.white));
+        colorPickerColors.add(ContextCompat.getColor(context, R.color.yellow_color));
+        colorPickerColors.add(ContextCompat.getColor(context, R.color.yellow_green_color));
+        colorPickerColors.add(ContextCompat.getColor(context, R.color.pink_pander_color));
+        colorPickerColors.add(ContextCompat.getColor(context, R.color.blue_sea_color));
+        colorPickerColors.add(ContextCompat.getColor(context, R.color.green_debug_color));
         colorPickerColors.add(ContextCompat.getColor(context, R.color.dark_green_color));
         colorPickerColors.add(ContextCompat.getColor(context, R.color.blue_color));
         colorPickerColors.add(ContextCompat.getColor(context, R.color.brown_color));
@@ -47,14 +53,6 @@ public class ColorPickerAdapter extends RecyclerView.Adapter<ColorPickerAdapter.
         colorPickerColors.add(ContextCompat.getColor(context, R.color.red_orange_color));
         colorPickerColors.add(ContextCompat.getColor(context, R.color.sky_blue_color));
         colorPickerColors.add(ContextCompat.getColor(context, R.color.violet_color));
-        colorPickerColors.add(ContextCompat.getColor(context, R.color.white));
-        colorPickerColors.add(ContextCompat.getColor(context, R.color.yellow_color));
-        colorPickerColors.add(ContextCompat.getColor(context, R.color.yellow_green_color));
-        colorPickerColors.add(ContextCompat.getColor(context, R.color.pink_pander_color));
-        colorPickerColors.add(ContextCompat.getColor(context, R.color.blue_sea_color));
-        colorPickerColors.add(ContextCompat.getColor(context, R.color.green_debug_color));
-
-
         return colorPickerColors;
     }
 

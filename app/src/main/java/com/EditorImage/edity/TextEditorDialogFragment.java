@@ -20,18 +20,20 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.Objects;
+
 public class TextEditorDialogFragment extends DialogFragment {
 
     public static final String TAG = TextEditorDialogFragment.class.getSimpleName();
     public static final String EXTRA_INPUT_TEXT = "extra_input_text";
     public static final String EXTRA_COLOR_CODE = "extra_color_code";
-    private EditText mAddTextEditText;
-    private TextView mAddTextDoneTextView;
-    private InputMethodManager mInputMethodManager;
-    private int mColorCode;
+    private EditText AddTextEditText;
+    private TextView AddTextDoneTextView;
+    private InputMethodManager InputMethodManager;
+    private int ColorCode;
     private TextEditor mTextEditor;
 
-    //Show dialog with provide text and text color
+    //Hiện hộp thoại với màu cung cấp văn bản và văn bản
     public static TextEditorDialogFragment show(@NonNull AppCompatActivity appCompatActivity,
                                                 @NonNull String inputText,
                                                 @ColorInt int colorCode) {
@@ -44,7 +46,7 @@ public class TextEditorDialogFragment extends DialogFragment {
         return fragment;
     }
 
-    //Show dialog with default text input as empty and text color white
+    //Hiện hộp thoại với đầu vào văn bản mặc định là trống và màu trắng văn bản
     public static TextEditorDialogFragment show(@NonNull AppCompatActivity appCompatActivity) {
         return show(appCompatActivity,
                 "", ContextCompat.getColor(appCompatActivity, R.color.white));
@@ -54,11 +56,11 @@ public class TextEditorDialogFragment extends DialogFragment {
     public void onStart() {
         super.onStart();
         Dialog dialog = getDialog();
-        //Make dialog full screen with transparent background
+        //Làm cho hộp thoại toàn màn hình với nền trong suốt
         if (dialog != null) {
             int width = ViewGroup.LayoutParams.MATCH_PARENT;
             int height = ViewGroup.LayoutParams.MATCH_PARENT;
-            dialog.getWindow().setLayout(width, height);
+            Objects.requireNonNull(dialog.getWindow()).setLayout(width, height);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         }
     }
@@ -72,46 +74,47 @@ public class TextEditorDialogFragment extends DialogFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mAddTextEditText = view.findViewById(R.id.add_text_edit_text);
-        mInputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        mAddTextDoneTextView = view.findViewById(R.id.add_text_done_tv);
+        AddTextEditText = view.findViewById(R.id.add_text_edit_text);
+        InputMethodManager = (InputMethodManager) Objects.requireNonNull(getActivity()).getSystemService(Context.INPUT_METHOD_SERVICE);
+        AddTextDoneTextView = view.findViewById(R.id.add_text_done_tv);
 
-        //Setup the color picker for text color
+        //Thiết lập bộ chọn màu cho màu văn bản
         RecyclerView addTextColorPickerRecyclerView = view.findViewById(R.id.add_text_color_picker_recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         addTextColorPickerRecyclerView.setLayoutManager(layoutManager);
         addTextColorPickerRecyclerView.setHasFixedSize(true);
         ColorPickerAdapter colorPickerAdapter = new ColorPickerAdapter(getActivity());
-        //This listener will change the text color when clicked on any color from picker
+
+        //Listener này sẽ thay đổi màu văn bản khi nhấp vào bất kỳ màu nào từ bộ chọn
         colorPickerAdapter.setOnColorPickerClickListener(new ColorPickerAdapter.OnColorPickerClickListener() {
             @Override
             public void onColorPickerClickListener(int colorCode) {
-                mColorCode = colorCode;
-                mAddTextEditText.setTextColor(colorCode);
+                ColorCode = colorCode;
+                AddTextEditText.setTextColor(colorCode);
             }
         });
         addTextColorPickerRecyclerView.setAdapter(colorPickerAdapter);
-        mAddTextEditText.setText(getArguments().getString(EXTRA_INPUT_TEXT));
-        mColorCode = getArguments().getInt(EXTRA_COLOR_CODE);
-        mAddTextEditText.setTextColor(mColorCode);
-        mInputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+        AddTextEditText.setText(Objects.requireNonNull(getArguments()).getString(EXTRA_INPUT_TEXT));
+        ColorCode = getArguments().getInt(EXTRA_COLOR_CODE);
+        AddTextEditText.setTextColor(ColorCode);
+        InputMethodManager.toggleSoftInput(android.view.inputmethod.InputMethodManager.SHOW_FORCED, 0);
 
-        //Make a callback on activity when user is done with text editing
-        mAddTextDoneTextView.setOnClickListener(new View.OnClickListener() {
+        //Thực hiện callback hoạt động nếu người dùng hoàn tất chỉnh sửa văn bản
+        AddTextDoneTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mInputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                InputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
                 dismiss();
-                String inputText = mAddTextEditText.getText().toString();
+                String inputText = AddTextEditText.getText().toString();
                 if (!TextUtils.isEmpty(inputText) && mTextEditor != null) {
-                    mTextEditor.onDone(inputText, mColorCode);
+                    mTextEditor.onDone(inputText, ColorCode);
                 }
             }
         });
 
     }
 
-    //Callback to listener if user is done with text editing
+    //Gọi lại Listener nếu người dùng hoàn tất chỉnh sửa văn bản
     public void setOnTextEditorListener(TextEditor textEditor) {
         mTextEditor = textEditor;
     }

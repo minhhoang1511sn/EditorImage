@@ -47,10 +47,12 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
         EmojiBSFragment.EmojiListener,
         StickerBSFragment.StickerListener, EditingToolsAdapter.OnItemSelected, FilterListener {
 
-    public static final String EXTRA_IMAGE_PATHS = "extra_image_paths";
     private static final String TAG = EditImageActivity.class.getSimpleName();
     private static final int CAMERA_REQUEST = 52;
     private static final int PICK_REQUEST = 53;
+    private final EditingToolsAdapter EditingToolsAdapter = new EditingToolsAdapter(this);
+    private final FilterViewAdapter FilterViewAdapter = new FilterViewAdapter(this);
+    private final ConstraintSet ConstraintSet = new ConstraintSet();
     private PhotoEditor PhotoEditor;
     private PhotoEditorView PhotoEditorView;
     private PropertiesBSFragment PropertiesBSFragment;
@@ -59,10 +61,7 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
     private TextView TxtCurrentTool;
     private Typeface WonderFont;
     private RecyclerView RvTools, RvFilters;
-    private EditingToolsAdapter EditingToolsAdapter = new EditingToolsAdapter(this);
-    private FilterViewAdapter FilterViewAdapter = new FilterViewAdapter(this);
     private ConstraintLayout RootView;
-    private ConstraintSet ConstraintSet = new ConstraintSet();
     private boolean IsFilterVisible;
 
 
@@ -75,7 +74,6 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
         initViews();
 
         WonderFont = Typeface.createFromAsset(getAssets(), "beyond_wonderland.ttf");
-
         PropertiesBSFragment = new PropertiesBSFragment();
         EmojiBSFragment = new EmojiBSFragment();
         StickerBSFragment = new StickerBSFragment();
@@ -91,29 +89,20 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
         RvFilters.setLayoutManager(llmFilters);
         RvFilters.setAdapter(FilterViewAdapter);
 
-
-        //Typeface mTextRobotoTf = ResourcesCompat.getFont(this, R.font.roboto_medium);
-        //Typeface mEmojiTypeFace = Typeface.createFromAsset(getAssets(), "emojione-android.ttf");
-
         PhotoEditor = new PhotoEditor.Builder(this, PhotoEditorView)
-                .setPinchTextScalable(true) // set flag to make text scalable when pinch
-                //.setDefaultTextTypeface(mTextRobotoTf)
-                //.setDefaultEmojiTypeface(mEmojiTypeFace)
+                .setPinchTextScalable(true) // Đặt lính canh để làm text có thể cân chỉnh
                 .build(); // build photo editor sdk
 
         PhotoEditor.setOnPhotoEditorListener(this);
-
-        //Set Image Dynamically
-        // mPhotoEditorView.getSource().setImageResource(R.drawable.color_palette);
     }
 
     private void initViews() {
+        ImageView imgSave;
+        ImageView imgClose;
         ImageView imgUndo;
         ImageView imgRedo;
         ImageView imgCamera;
         ImageView imgGallery;
-        ImageView imgSave;
-        ImageView imgClose;
 
         PhotoEditorView = findViewById(R.id.photoEditorView);
         TxtCurrentTool = findViewById(R.id.txtCurrentTool);
@@ -311,7 +300,7 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
 
     private void showSaveDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Bạn chưa lưu ảnh. Thật sự muốn rời");
+        builder.setMessage("Bạn chưa lưu ảnh. Thật sự muốn rời ?");
         builder.setPositiveButton("Lưu", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

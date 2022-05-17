@@ -28,6 +28,30 @@ public class EditingToolsAdapter extends RecyclerView.Adapter<EditingToolsAdapte
         ToolList.add(new ToolModel("Sticker", R.drawable.ic_sticker, ToolType.STICKER));
     }
 
+    @Override
+    public int getItemCount() {
+        return ToolList.size();
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        ToolModel item = ToolList.get(position);
+        holder.txtTool.setText(item.ToolName);
+        holder.imgToolIcon.setImageResource(item.ToolIcon);
+    }
+
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.row_editing_tools, parent, false);
+        return new ViewHolder(view);
+    }
+
+    public interface OnItemSelected {
+        void onToolSelected(ToolType toolType);
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imgToolIcon;
         TextView txtTool;
@@ -45,23 +69,6 @@ public class EditingToolsAdapter extends RecyclerView.Adapter<EditingToolsAdapte
         }
     }
 
-
-    @Override
-    public int getItemCount() {
-        return ToolList.size();
-    }
-
-    public interface OnItemSelected {
-        void onToolSelected(ToolType toolType);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ToolModel item = ToolList.get(position);
-        holder.txtTool.setText(item.ToolName);
-        holder.imgToolIcon.setImageResource(item.ToolIcon);
-    }
-
     class ToolModel {
         private String ToolName;
         private int ToolIcon;
@@ -72,15 +79,6 @@ public class EditingToolsAdapter extends RecyclerView.Adapter<EditingToolsAdapte
             ToolIcon = toolIcon;
             ToolType = toolType;
         }
-
-    }
-
-    @NonNull
-    @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.row_editing_tools, parent, false);
-        return new ViewHolder(view);
     }
 
 }

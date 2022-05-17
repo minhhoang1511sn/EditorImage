@@ -91,7 +91,34 @@ public class StickerBSFragment extends BottomSheetDialogFragment {
 
     public class StickerAdapter extends RecyclerView.Adapter<StickerAdapter.ViewHolder> {
 
-        int[] stickerList = new int[]{R.drawable.bb,R.drawable.cc,R.drawable.dd,R.drawable.uu};
+        int[] stickerList = new int[]{
+                R.drawable.bb,
+                R.drawable.cc,
+                R.drawable.dd,
+                R.drawable.aa,
+                R.drawable.ee,
+                R.drawable.ff,
+                R.drawable.ss,
+                R.drawable.zz,
+                R.drawable.mm,
+                R.drawable.nn,
+                R.drawable.rr,
+                R.drawable.ii,
+                R.drawable.gg,
+                R.drawable.vv,
+                R.drawable.jj,
+                R.drawable.kk,
+                R.drawable.ll,
+                R.drawable.xx,
+                R.drawable.tt,
+                R.drawable.yy,
+                R.drawable.oo,
+                R.drawable.pp,
+                R.drawable.aaa,
+                R.drawable.bbb,
+                R.drawable.ccc,
+                R.drawable.ddd
+        };
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_sticker, parent, false);

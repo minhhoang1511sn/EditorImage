@@ -17,6 +17,18 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+        }
+        debug{
+            signingConfig signingConfigs.debug
+        }
+    }
+    signingConfigs {
+        release {
+            keyAlias'keystore1'
+            keyPassword'151120'
+            storeFile file('D:\\Hoc\\HOC\\HK2\\NAM-III\\Mobile-Programming\\EditorImage\\app\\releasekeystore.jks')
+            storePassword'151120'
         }
     }
 }
